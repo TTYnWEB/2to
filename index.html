@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/pico.classless.violet.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon.png">
+    <title>2to.co</title>
+  </head>
+  <body>
+
+    <!-- HEADER --------------------------------------------------------------->
+    <header>
+      <hgroup>
+        <h1>2to.co</h1>
+        <p>a minimalist url shortener</p>
+      </hgroup>
+    </header>
+    <!-- /HEADER -------------------------------------------------------------->
+
+    <!-- MAIN ----------------------------------------------------------------->
+    <main>
+      <!-- URL input form -->
+      <form id="form">
+        <fieldset role="group">
+          <input type="url" id="url" name="url" placeholder="url to shorten" required>
+          <!-- aria-invalid="false" -->
+          <input id="submit-btn" type="submit" disabled>
+        </fieldset>
+      </form>
+      <!-- /URL input form -->
+
+      <!-- img src="imgs/mascot.png" -->
+
+      <!-- dialog -->
+      <dialog id="modal-short-url">
+        <article>
+          <header>
+            <button aria-label="Close" rel="prev"></button>
+            <h6>Short URL</h6>
+          </header>
+          <input id="short-url" type="text" readonly>
+          <p hidden>Short URL copied to clipboard</p>
+          <p hidden>since you have enabled "clipboard write permissions" </p>
+        </article>
+      </dialog>
+      <!-- /dialog -->
+    </main>
+    <!-- /MAIN --------------------------------------------------------------->
+
+    <!-- FOOTER -------------------------------------------------------------->
+    <footer>
+      <details>
+        <summary>Preferences & Settings</summary>
+        <section>
+          <img src="imgs/prefs_icon.png">
+          <span><b>Preferences</b></span>
+        </section>
+        <section>
+          <input id="theme-toggle" name="lights" type="checkbox" role="switch">
+          dark/light theme
+        </section>
+        <section>
+          <a href="/settings.html" style="text-decoration: none">
+            <img src="imgs/settings_icon.png">
+            <span><b>Settings</b></span>
+          </a>
+        </section>
+        <!-- neither write/read avail for ffox, disable -->
+        <section>
+          <input id="clip-r" name="clipboard_read" type="checkbox" role="switch">
+          auto-fill url input <sub><i>(requires "clipboard read permission")</i></sub>
+        </section>
+        <section>
+          <input id="clip-w" name="clipboard_write" type="checkbox" role="switch">
+          auto-copy "short url" after submission
+        </section>
+      </details>
+    </footer>
+    <!-- /FOOTER -------------------------------------------------------------->
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
+
+<!--
+      <dialog>
+        <article>
+          <h2>clipboard read permissions denied</h2>
+          <p>
+            Chromium-based: Settings > Privacy and Security > Site Settings > Clipboard
+            Edge: Settings > Cookies and Site Permissions > Clipboard
+            Firefox: click the lock icon
+          </p>
+          <footer>
+            <button>close</button>
+          </footer>
+        </article>
+      </dialog>
+-->
