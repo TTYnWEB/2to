@@ -40,9 +40,25 @@
             <button aria-label="Close" rel="prev"></button>
             <h6>Short URL</h6>
           </header>
-          <input id="short-url" type="text" readonly>
+	  <section role="group">
+            <input id="short-url" type="text" readonly>
+	    <button id="copy"><img src="imgs/icon_copy.png"></button>
+	  </section>
           <p hidden>Short URL copied to clipboard</p>
           <p hidden>since you have enabled "clipboard write permissions" </p>
+        </article>
+      </dialog>
+      <dialog>
+        <article>
+          <h2>clipboard read permissions denied</h2>
+          <p>
+            Chromium-based: Settings > Privacy and Security > Site Settings > Clipboard
+            Edge: Settings > Cookies and Site Permissions > Clipboard
+            Firefox: click the lock icon
+          </p>
+          <footer>
+            <button>close</button>
+          </footer>
         </article>
       </dialog>
       <!-- /dialog -->
@@ -83,19 +99,3 @@
     <script src="js/script.js"></script>
   </body>
 </html>
-
-<!--
-      <dialog>
-        <article>
-          <h2>clipboard read permissions denied</h2>
-          <p>
-            Chromium-based: Settings > Privacy and Security > Site Settings > Clipboard
-            Edge: Settings > Cookies and Site Permissions > Clipboard
-            Firefox: click the lock icon
-          </p>
-          <footer>
-            <button>close</button>
-          </footer>
-        </article>
-      </dialog>
--->

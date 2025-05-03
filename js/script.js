@@ -7,6 +7,7 @@ const clipR         = document.getElementById('clip-r');
 const clipW         = document.getElementById('clip-w');
 const inputShortURL = document.getElementById('short-url');
 const modalShortURL = document.getElementById('modal-short-url');
+const copyBtn       = document.getElementById('copy');
 const closeBtn      = document.querySelector('[aria-label="Close"]');
 
 //[ FUNC ]/////////////////////////////////////////////////////////////////////
@@ -64,11 +65,15 @@ const addURL = async () => {
       const shortURL = `https://2to.co/${data.key}`;
       inputShortURL.value = shortURL;
       modalShortURL.showModal();
+      const isClipW = (localStorage.getItem('clip-w') === 'true');
+      console.log({ isClipW }, `val: ${inputShortURL.value}`);
+      if (isClipW)
+        navigator.clipboard.writeText(inputShortURL.value);
+      inputShortURL.select();
     });
 };
 
 const toggleSubmitBtn = () => {
-  // if ((urlInput.validity.valid) && isURL(urlInput.value))
   if (urlInput.validity.valid)
     submitButton.disabled = false;
   else
@@ -145,7 +150,7 @@ document.addEventListener('click', (e) => {
     modalShortURL.close();
 });
 
-// Close with Esc key
+// Close with Esc key)
 document.addEventListener('keydown', (e) => {
   const modalIsVisible = () => modalShortURL.open;
   if (modalIsVisible && (e.key === "Escape"))
@@ -154,6 +159,11 @@ document.addEventListener('keydown', (e) => {
 
 // Close with Close btn
 closeBtn.addEventListener('click', () => modalShortURL.close());
+
+// copy Short URL to clipboard
+copyBtn.addEventListener('click', () => (
+  navigator.clipboard.writeText(inputShortURL.value)
+));
 
 
 //[ MAIN ]/////////////////////////////////////////////////////////////////////
