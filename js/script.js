@@ -1,13 +1,14 @@
+// ELEMs
 const html          = document.documentElement;
-const urlInput      = document.getElementById('url');
 const form          = document.getElementById('form');
-const submitButton  = document.getElementById('submit-btn');
-const themeToggle   = document.getElementById('theme-toggle');
 const clipR         = document.getElementById('clip-r');
 const clipW         = document.getElementById('clip-w');
+const copyBtn       = document.getElementById('copy');
+const urlInput      = document.getElementById('url');
+const themeToggle   = document.getElementById('theme-toggle');
+const submitButton  = document.getElementById('submit-btn');
 const inputShortURL = document.getElementById('short-url');
 const modalShortURL = document.getElementById('modal-short-url');
-const copyBtn       = document.getElementById('copy');
 const closeBtn      = document.querySelector('[aria-label="Close"]');
 
 //[ FUNC ]/////////////////////////////////////////////////////////////////////
@@ -29,7 +30,6 @@ const setInitialTheme = () => {
   }
 };
 
-//shortURL.value = `${window.location.href}`;
 const selectText = e => e.target.select();
 
 const queryPermissions = async (name) => navigator.permissions.query({ name });
@@ -102,12 +102,10 @@ themeToggle.addEventListener('change', () => {
     setTheme('dark');
 });
 
-
 //[ EventListener - input ]////////////////////////////////////////////////////
 // Event listener to enable/disable submit button based on input value
 // validatorjs npm pkg - isURL() func
 urlInput.addEventListener('input', toggleSubmitBtn);
-
 
 //[ EventListener - form submit ]///////////////////////////////////////////////
 form.addEventListener('submit', (e) => {
