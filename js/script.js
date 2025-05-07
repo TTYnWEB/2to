@@ -74,10 +74,20 @@ const addURL = async () => {
 };
 
 const toggleSubmitBtn = () => {
+  if (!urlInput.value.length) {
+    urlInput.removeAttribute('aria-invalid');
+    return null;
+  }
+
+  const toggleValidity = bool => {
+    submitButton.disabled = bool;
+    urlInput.setAttribute('aria-invalid', bool);
+  };
+
   if (urlInput.validity.valid)
-    submitButton.disabled = false;
+    toggleValidity(false);
   else
-    submitButton.disabled = true;
+    toggleValidity(true);
 };
 
 const autoPaste = async () => {
