@@ -24,13 +24,16 @@
       <!-- URL input form -->
       <form id="form">
         <fieldset role="group">
-          <input type="url" id="url" name="url" placeholder="url to shorten" required>
+	<input type="url" id="url" name="url" placeholder="url to shorten" required>
           <!-- aria-invalid="false" -->
           <input id="submit-btn" type="submit" disabled>
         </fieldset>
       </form>
       <!-- /URL input form -->
 
+      <template>
+        <article id="err" style="color: #D93526">ERR</article>
+      </template>
       <!-- img src="imgs/mascot.png" -->
 
       <!-- dialog -->
@@ -46,19 +49,6 @@
 	  </section>
           <p hidden>Short URL copied to clipboard</p>
           <p hidden>since you have enabled "clipboard write permissions" </p>
-        </article>
-      </dialog>
-      <dialog>
-        <article>
-          <h2>clipboard read permissions denied</h2>
-          <p>
-            Chromium-based: Settings > Privacy and Security > Site Settings > Clipboard
-            Edge: Settings > Cookies and Site Permissions > Clipboard
-            Firefox: click the lock icon
-          </p>
-          <footer>
-            <button>close</button>
-          </footer>
         </article>
       </dialog>
       <!-- /dialog -->
@@ -94,6 +84,6 @@
     </footer>
     <!-- /FOOTER -------------------------------------------------------------->
 
-    <script src="js/script.min.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
