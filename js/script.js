@@ -6,6 +6,7 @@ const clipW         = document.getElementById('clip-w');
 const copyBtn       = document.getElementById('copy');
 const urlInput      = document.getElementById('url');
 const themeToggle   = document.getElementById('theme-toggle');
+const invalidHelp   = document.getElementById('invalid-helper');
 const submitButton  = document.getElementById('submit-btn');
 const inputShortURL = document.getElementById('short-url');
 const modalShortURL = document.getElementById('modal-short-url');
@@ -31,6 +32,11 @@ const setInitialTheme = () => {
 };
 
 const selectText = e => e.target.select();
+
+const toggleValidity = bool => {
+  submitButton.disabled = bool;
+  urlInput.setAttribute('aria-invalid', bool);
+};
 
 const queryPermissions = async (name) => navigator.permissions.query({ name });
 
@@ -62,14 +68,19 @@ const addURL = async () => {
   const res = await fetch('/api/add', payload)
     .then(res => res.json())
     .then(data => {
+      invalidHelp.setAttribute('hidden', true);
       const shortURL = `https://2to.co/${data.key}`;
       inputShortURL.value = shortURL;
       modalShortURL.showModal();
       const isClipW = (localStorage.getItem('clip-w') === 'true');
-      console.log({ isClipW }, `val: ${inputShortURL.value}`);
       if (isClipW)
         navigator.clipboard.writeText(inputShortURL.value);
       inputShortURL.select();
+    })
+    .catch(err => {
+      invalidHelp.removeAttribute('hidden');
+      submitButton.disabled = true;
+      urlInput.setAttribute('aria-invalid', true);
     });
 };
 
@@ -79,10 +90,8 @@ const toggleSubmitBtn = () => {
     return null;
   }
 
-  const toggleValidity = bool => {
-    submitButton.disabled = bool;
-    urlInput.setAttribute('aria-invalid', bool);
-  };
+  if (!invalidHelp.hasAttribute('hidden'))
+    invalidHelp.setAttribute('hidden', true);
 
   if (urlInput.validity.valid)
     toggleValidity(false);
@@ -126,15 +135,13 @@ form.addEventListener('submit', (e) => {
 //[ EventListener - clip-r ]////////////////////////////////////////////////////
 // NOTE: doesn't work on ffox
 clipR.addEventListener('change', async () => {
+  clipRtoggle = bool => {
+    clipR.checked = bool;
+    localStorage.setItem('clip-r', `${bool}`);
+  };
   await navigator.clipboard.readText()
-    .then(() => {
-      clipR.checked = true;
-      localStorage.setItem('clip-r', 'true');
-    })
-    .catch(() => {
-      clipR.checked = false
-      localStorage.setItem('clip-r', 'false');
-    });
+    .then(() => clipRtoggle(true))
+    .catch(() => clipRtoggle(false));
 });
 
 //[ EventListener - clip-w ]////////////////////////////////////////////////////
