@@ -24,9 +24,9 @@
       <!-- URL input form -->
       <form id="form">
         <fieldset role="group">
-	<input type="url" id="url" name="url" placeholder="url to shorten" required>
-          <!-- aria-invalid="false" -->
+          <input type="url" id="url" name="url" placeholder="url to shorten" required>
           <input id="submit-btn" type="submit" disabled>
+          <small id="invalid-helper">invalid or malformed URL</small>
         </fieldset>
       </form>
       <!-- /URL input form -->
@@ -43,10 +43,10 @@
             <button aria-label="Close" rel="prev"></button>
             <h6>Short URL</h6>
           </header>
-	  <section role="group">
+          <section role="group">
             <input id="short-url" type="text" readonly>
-	    <button id="copy"><img src="imgs/icon_copy.png"></button>
-	  </section>
+            <button id="copy"><img src="imgs/icon_copy.png"></button>
+          </section>
           <p hidden>Short URL copied to clipboard</p>
           <p hidden>since you have enabled "clipboard write permissions" </p>
         </article>
