@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.violet.min.css">
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.violet.min.css"-->
     <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon.png">
+    <!--link rel="manifest" href="/manifest.json"-->
     <title>2to.co</title>
   </head>
   <body>
@@ -46,6 +48,17 @@
           <p hidden>since you have enabled "clipboard write permissions" </p>
         </article>
       </dialog>
+      <dialog id="modal-clip-r">
+        <article>
+          <header>
+            <button aria-label="Close" rel="prev"></button>
+            <h6>clipboard-read permissions</h6>
+          </header>
+	  <p>"clipboard-read" permissions already either denied/granted</p>
+	  <p>(and can't be changed automatically)</p>
+	  <p>please clear/reset (clipboard-read) "site setting(s)"</p>
+        </article>
+      </dialog>
       <!-- /dialog -->
     </main>
     <!-- /MAIN --------------------------------------------------------------->
@@ -76,6 +89,7 @@
           auto-copy "short url" after submission
         </section>
       </details>
+      <!--button id="install-btn" hidden>install</button-->
     </footer>
     <!-- /FOOTER -------------------------------------------------------------->
 
