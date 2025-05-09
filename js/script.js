@@ -45,7 +45,10 @@ const setInitialTheme = () => {
 const selectText = e => e.target.select();
 //const isModalOpen = () => modalShortURL.open;
 const isModalOpen = () => [...modals].some(({ open }) => open);
-const queryPermissions = async (name) => navigator.permissions.query({ name });
+const queryPermissions = async (name) => (
+  navigator.permissions.query({ name })
+    .catch(() => ({ state: null }))
+);
 
 const toggleValidity = bool => {
   submitButton.disabled = bool;
@@ -162,6 +165,12 @@ form.addEventListener('submit', (event) => {
 clipR.addEventListener('change', async () => {
   const onIntention = clipR.checked;
   const { state: clipRpermState } = await queryPermissions(PERMISSIONS.CLIPBOARD_READ);
+  // for FFOX, might want to just remove entirely if FFOX detected
+  if (!clipRpermState) {
+    setClipPref(clipR, 'clip-r', false);
+    clipR.disabled = true;
+    return null;
+  }
   const [
     clipRpermGranted,
     clipRpermDenied,
