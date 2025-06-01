@@ -29,7 +29,7 @@ const setTheme = mode => {
   localStorage.setItem('theme', mode);
 };
 
-const setInitialTheme = () => {
+const initTheme = () => {
   const storedTheme = localStorage.getItem('theme');
   if (storedTheme) {
     html.setAttribute('data-theme', storedTheme);
@@ -139,6 +139,7 @@ const autoPaste = async () => {
     urlInput.focus();
   }
 };
+
 //[ EventListeners ]////////////////////////////////////////////////////////////
 // EL - theme
 themeToggle.addEventListener('change', () => (
@@ -148,11 +149,22 @@ themeToggle.addEventListener('change', () => (
 // EL - input
 // Event listener to enable/disable submit button based on input value
 // validatorjs npm pkg - isURL() func
-let debounceTimeout;
+const debounce = (fn, delay = 300) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+};
+// let debounceTimeout;
 urlInput.addEventListener('input', () => {  // NOTE: should be change (review all change vs input)?
-  clearTimeout(debounceTimeout);
-  debounceTimeout = setTimeout(toggleSubmitBtn, 100);
+  debounce(toggleSubmitBtn, 100);
+  // clearTimeout(debounceTimeout);
+  // debounceTimeout = setTimeout(toggleSubmitBtn, 100);
 });
+// paste
+urlInput.addEventListener('paste', debounce(toggleSubmitBtn, 100));
+
 
 // EL - form submit
 form.addEventListener('submit', (event) => {
@@ -235,7 +247,7 @@ copyBtn.addEventListener('click', () => (
 
 
 //[ MAIN ]/////////////////////////////////////////////////////////////////////
-setInitialTheme();
+initTheme();
 initSettings();
 autoPaste();
 
@@ -279,5 +291,14 @@ installBtn.addEventListener('click', async () => {
     installBtn.setAttribute('hidden', null);
   }
 });
+
+const modalManager = {
+  closeAll: () => modals.forEach(m => m.close()),
+  getOpen: () => [...modals].find(m => m.open),
+  closeOpen: () => {
+    const open = modalManager.getOpen();
+    if (open) open.close();
+  }
+};
 
 */
